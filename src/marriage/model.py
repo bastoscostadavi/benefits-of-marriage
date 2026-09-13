@@ -90,7 +90,9 @@ def simulate(n=10_000, steps=100, dist="N", lam=np.inf, *, mu=0.0, sigma=1.0,
     ----------
     lam
         The proposal threshold ``Lambda``.  ``np.inf`` gives the mate-search
-        model with no marriage.
+        model with no marriage.  May also be a length-``n`` array, giving each
+        agent its own threshold -- used to let a small group deviate from the
+        society's convention.
     sigma_lam
         Spread of the per-agent thresholds ``Lambda_k ~ N(lam, sigma_lam)``.
         The paper takes the ``sigma_lam -> 0`` limit, which is the default.
@@ -116,7 +118,13 @@ def simulate(n=10_000, steps=100, dist="N", lam=np.inf, *, mu=0.0, sigma=1.0,
     n = affinity.n
     rng = np.random.default_rng(seed if match_seed is None else match_seed)
 
-    if np.isinf(lam):
+    if np.ndim(lam) > 0:
+        # a per-agent threshold vector: lets a sub-population deviate from the
+        # society's convention, which is what the invasion analysis needs
+        thresholds = np.asarray(lam, dtype=float)
+        if thresholds.shape != (n,):
+            raise ValueError(f"lam vector must have length {n}, got {thresholds.shape}")
+    elif np.isinf(lam):
         thresholds = np.full(n, np.inf)
     elif sigma_lam > 0:
         thresholds = rng.normal(lam, sigma_lam, n)
@@ -197,7 +205,8 @@ def simulate(n=10_000, steps=100, dist="N", lam=np.inf, *, mu=0.0, sigma=1.0,
     return SimulationResult(
         utility=history, mean_utility=mean_u, std_utility=std_u,
         coupled_share=coupled, married_share=marr, partner=partner,
-        married=married, n_partners=n_partners, affinity=affinity, lam=float(lam),
+        married=married, n_partners=n_partners, affinity=affinity,
+        lam=float(lam) if np.ndim(lam) == 0 else np.nan,
         params=dict(n=n, steps=steps, dist=dist, mu=mu, sigma=sigma, mu_s=mu_s,
                     sigma_s=sigma_s, sigma_lam=sigma_lam, sigma_q=sigma_q, seed=seed,
                     two_sided=side is not None),

@@ -101,3 +101,37 @@ def test_shift_and_rescale_symmetry():
                       mu=mu, sigma=sigma)
     expected = sigma * base.mean_utility + mu
     assert np.allclose(scaled.mean_utility, expected, atol=0.08)
+
+
+def test_per_agent_thresholds():
+    """A lam vector lets a subgroup deviate from the society's convention."""
+    n = 4000
+    lam = np.full(n, 1.0)
+    lam[:200] = np.inf                       # these agents never marry
+    res = simulate(n=n, steps=60, dist="N", lam=lam, seed=30)
+    assert not res.married[:200].any()
+    assert res.married[200:].any()
+    with pytest.raises(ValueError):
+        simulate(n=n, steps=2, dist="N", lam=np.ones(7), seed=30)
+
+
+def test_commitment_norm_is_not_self_enforcing_at_the_top():
+    """The most desirable agents gain by defecting from the welfare-optimal norm.
+
+    Society plays Lambda = 1; the most desirable 5% deviate to Lambda' = 2.
+    """
+    from marriage.affinity import make_affinity
+
+    n, gains = 10_000, []
+    for seed in range(3):
+        aff = make_affinity(n, "N", sigma=0.8, sigma_q=0.6, seed=seed)
+        top = np.argsort(aff.column_means())[-500:]
+        base = np.full(n, 1.0)
+        conform = simulate(steps=100, dist="N", lam=base, affinity=aff,
+                           seed=seed, match_seed=seed + 7, track_utility=True)
+        lam = base.copy()
+        lam[top] = 2.0
+        defect = simulate(steps=100, dist="N", lam=lam, affinity=aff,
+                          seed=seed, match_seed=seed + 7, track_utility=True)
+        gains.append(defect.utility[-1, top].mean() - conform.utility[-1, top].mean())
+    assert np.mean(gains) > 0.1
