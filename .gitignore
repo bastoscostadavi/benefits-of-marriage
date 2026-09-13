@@ -8,9 +8,16 @@ venv/
 *.egg-info/
 
 # LaTeX build artefacts
-paper/*.aux
-paper/*.log
-paper/*.out
-paper/*.bbl
-paper/*.blg
-paper/*.synctex.gz
+submissions/wolfram/*.aux
+submissions/wolfram/*.log
+submissions/wolfram/*.out
+submissions/wolfram/*.bbl
+submissions/wolfram/*.blg
+submissions/wolfram/*.synctex.gz
+submissions/aamas/*.aux
+submissions/aamas/*.bbl
+submissions/aamas/*.blg
+submissions/aamas/*.log
+submissions/aamas/*.out
+submissions/aamas/*.synctex.gz
+submissions/aamas/*-submission.zip

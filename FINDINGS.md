@@ -26,7 +26,7 @@ the paper's figures.
 | A planner beats the dynamics by a wide margin | fig13 | yes, though see below |
 
 The reproduction was written from the paper text and checked against the
-original Mathematica notebook (`paper/anc/DatingMarriageModel.nb`), whose
+original Mathematica notebook (`submissions/wolfram/anc/DatingMarriageModel.nb`), whose
 `DatingMarriageModel` function the Python core mirrors step for step.
 
 ## Does not reproduce

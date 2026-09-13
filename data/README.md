@@ -14,7 +14,7 @@ birth cohort from 1900 to 1990.
 Source: Our World in Data, "Marriages and Divorces"
 (<https://ourworldindata.org/marriages-and-divorces>), after the UK Office for
 National Statistics. Transcribed from the paper's Mathematica notebook
-(`paper/anc/DatingMarriageModel.nb`, cell `In[32]`), which is the version the
+(`submissions/wolfram/anc/DatingMarriageModel.nb`, cell `In[32]`), which is the version the
 published figure was drawn from.
 
 Cohorts are truncated at the age they had reached when the data was compiled,

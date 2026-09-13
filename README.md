@@ -49,7 +49,7 @@ src/marriage/
 scripts/         one script per figure, each regenerating results/figNN_*.pdf/png
 data/            the England & Wales cohort marriage data used in Fig. 8
 tests/           22 tests, most of them checking the paper's own numbers
-paper/           the original LaTeX, figures and Mathematica notebook
+submissions/     paper drafts: wolfram/ (the original), aamas/ (the AAMAS port)
 FINDINGS.md      what reproduced, what did not, and what turned up
 ```
 

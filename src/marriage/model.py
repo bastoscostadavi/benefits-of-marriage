@@ -15,7 +15,7 @@ Dynamics, per discrete step ``t -> t+1``:
    married couple never breaks: ``Lambda = inf`` is the model without marriage.
 
 This mirrors the ``DatingMarriageModel`` function in the paper's Mathematica
-notebook (``paper/anc/DatingMarriageModel.nb``), vectorised with numpy.
+notebook (``submissions/wolfram/anc/DatingMarriageModel.nb``), vectorised with numpy.
 """
 
 from __future__ import annotations
