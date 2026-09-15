@@ -40,13 +40,12 @@ def new_fig(ncols=1, nrows=1, width=4.1, height=3.1, **kw):
 
 
 def save(fig, name, subdir=None):
-    """Write ``name`` as both PDF (for LaTeX) and PNG (for the README)."""
+    """Write ``name`` as a PDF.  PDF only -- see CLAUDE.md."""
     out = RESULTS if subdir is None else RESULTS / subdir
     out.mkdir(parents=True, exist_ok=True)
-    for ext in ("pdf", "png"):
-        fig.savefig(out / f"{name}.{ext}")
+    fig.savefig(out / f"{name}.pdf")
     plt.close(fig)
-    print(f"  wrote results/{name}.pdf and .png")
+    print(f"  wrote results/{name}.pdf")
     return out / f"{name}.pdf"
 
 

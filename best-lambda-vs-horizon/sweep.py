@@ -13,7 +13,7 @@ bootstrapping over societies.
 
     python best-lambda-vs-horizon/sweep.py [--dist N|U] [--seeds 12]
 
-Writes results/sweep_<dist>.npz and results/best_lambda_<dist>.pdf/png.
+Writes results/sweep_<dist>.npz and results/best_lambda_<dist>.pdf.
 """
 
 import argparse
@@ -123,8 +123,7 @@ def main():
     ax2.set_title("what the fixed convention gives up")
     ax2.legend(fontsize=8)
 
-    for ext in ("pdf", "png"):
-        fig.savefig(RESULTS / f"best_lambda_{args.dist}.{ext}", dpi=200, bbox_inches="tight")
+    fig.savefig(RESULTS / f"best_lambda_{args.dist}.pdf", bbox_inches="tight")
     print(f"  wrote {RESULTS}/best_lambda_{args.dist}.pdf")
 
 

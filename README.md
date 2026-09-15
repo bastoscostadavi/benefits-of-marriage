@@ -46,7 +46,15 @@ src/marriage/
   analytic.py    the large-N recursion, exact (sympy) and numeric
   matching.py    Gale-Shapley and the utilitarian optimum, as benchmarks
   style.py       shared plotting style
-scripts/         one script per figure, each regenerating results/figNN_*.pdf/png
+scripts/         one script per figure, each regenerating results/figNN_*.pdf
+desirability-nash-equilibrium/
+                 the only place agents differ in how much they are liked:
+                 the desirability term, Fig. 7, and where self-interest lands
+                 when each percentile picks its own Lambda (own results/)
+nash-equilibrium/
+                 the paper's own exchangeable agents, asked the individual
+                 question: society at Lambda = sigma, one random agent deviates
+                 -- is it better off?  (own results/)
 data/            the England & Wales cohort marriage data used in Fig. 8
 tests/           22 tests, most of them checking the paper's own numbers
 submissions/     paper drafts: wolfram/ (the original), aamas/ (the AAMAS port)
@@ -63,7 +71,7 @@ FINDINGS.md      what reproduced, what did not, and what turned up
 | `fig04` | `Lambda = sigma` against no marriage, mean and spread |
 | `fig05` | the full utility distribution at `t = 100` |
 | `fig06` | robustness: what if being single is not the same draw? |
-| `fig07` | who gains from marriage — and who loses |
+| `fig07` | who gains from marriage — and who loses (built in `desirability-nash-equilibrium/`, which is where desirability lives) |
 | `fig08` | married share, model against real cohort data |
 | `fig09` | the large-`N` theory checked at the first step |
 | `fig10` | the mean-field recursion over several steps |
